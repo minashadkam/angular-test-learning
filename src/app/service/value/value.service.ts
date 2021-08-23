@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {of} from 'rxjs';
+import {delay} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,8 @@ export class ValueService {
   getPromiseValue() {
     return Promise.resolve('promise value');
   }
-
+  getObservableDelayValue() {
+    return of('observable delay value').pipe(delay(10));
+  }
 
 }
