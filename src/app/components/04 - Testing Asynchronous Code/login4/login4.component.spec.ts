@@ -54,21 +54,21 @@ describe('Component: Login', () => {
     expect(el.nativeElement.textContent.trim()).toBe('Logout');
   }));
 
-  it('Button label via async() and whenStable()', () => {
-    // async() knows about all the pending promises defined in it's function body.
-    fixture.detectChanges();
-    expect(el.nativeElement.textContent.trim()).toBe('Login');
-    spyOn(authService, 'isAuthenticated').and.returnValue(Promise.resolve(true));
-
-    fixture.whenStable().then(() => {
-      // This is called when ALL pending promises have been resolved
-      fixture.detectChanges();
-      expect(el.nativeElement.textContent.trim()).toBe('Logout');
-    });
-
-    component.ngOnInit();
-
-  });
+  // it('Button label via async() and whenStable()', () => {
+  //   // async() knows about all the pending promises defined in it's function body.
+  //   fixture.detectChanges();
+  //   expect(el.nativeElement.textContent.trim()).toBe('Login');
+  //   spyOn(authService, 'isAuthenticated').and.returnValue(Promise.resolve(true));
+  //
+  //   fixture.whenStable().then(() => {
+  //     // This is called when ALL pending promises have been resolved
+  //     fixture.detectChanges();
+  //     expect(el.nativeElement.textContent.trim()).toBe('Logout');
+  //   });
+  //
+  //   component.ngOnInit();
+  //
+  // });
 
   it('Button label via jasmine.done', (done) => {
     fixture.detectChanges();
