@@ -1,9 +1,9 @@
 import {Login4Component, AuthService} from './login4.component';
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick, async, waitForAsync} from '@angular/core/testing';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 
-describe('Component: Login', () => {
+fdescribe('Component: Login', () => {
 
   let component: Login4Component;
   let fixture: ComponentFixture<Login4Component>;
@@ -29,16 +29,19 @@ describe('Component: Login', () => {
 
     //  get the "a" element by CSS selector (e.g., by class name)
     el = fixture.debugElement.query(By.css('a'));
+
   });
 
-  it('Test without regard to asynchrony', () => {
-    fixture.detectChanges();
-    expect(el.nativeElement.textContent.trim()).toBe('Login');
-    spyOn(authService, 'isAuthenticated').and.returnValue(Promise.resolve(true));
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(el.nativeElement.textContent.trim()).toBe('Logout');
-  });
+
+  // // failed : Expected 'Login' to be 'Logout'
+  // it('Test without regard to asynchrony', () => {
+  //   fixture.detectChanges();
+  //   expect(el.nativeElement.textContent.trim()).toBe('Login');
+  //   spyOn(authService, 'isAuthenticated').and.returnValue(Promise.resolve(true));
+  //   component.ngOnInit();
+  //   fixture.detectChanges();
+  //   expect(el.nativeElement.textContent.trim()).toBe('Logout');
+  // });
 
   it('Button label via fakeAsync() and tick()', fakeAsync(() => {
     expect(el.nativeElement.textContent.trim()).toBe('');
@@ -54,21 +57,25 @@ describe('Component: Login', () => {
     expect(el.nativeElement.textContent.trim()).toBe('Logout');
   }));
 
-  // it('Button label via async() and whenStable()', () => {
-  //   // async() knows about all the pending promises defined in it's function body.
-  //   fixture.detectChanges();
-  //   expect(el.nativeElement.textContent.trim()).toBe('Login');
-  //   spyOn(authService, 'isAuthenticated').and.returnValue(Promise.resolve(true));
-  //
-  //   fixture.whenStable().then(() => {
-  //     // This is called when ALL pending promises have been resolved
-  //     fixture.detectChanges();
-  //     expect(el.nativeElement.textContent.trim()).toBe('Logout');
-  //   });
-  //
-  //   component.ngOnInit();
-  //
-  // });
+
+  //// async is deprecated use waitForAsync
+  //// it('Button label via async() and whenStable()', async(() => {});
+
+  it('Button label via async() and whenStable()', waitForAsync(() => {
+    // async() knows about all the pending promises defined in it's function body.
+    fixture.detectChanges();
+    expect(el.nativeElement.textContent.trim()).toBe('Login');
+    spyOn(authService, 'isAuthenticated').and.returnValue(Promise.resolve(true));
+
+    fixture.whenStable().then(() => {
+      // This is called when ALL pending promises have been resolved
+      fixture.detectChanges();
+      expect(el.nativeElement.textContent.trim()).toBe('Logout');
+    });
+
+    component.ngOnInit();
+
+  }));
 
   it('Button label via jasmine.done', (done) => {
     fixture.detectChanges();
@@ -89,4 +96,5 @@ describe('Component: Login', () => {
       done();
     });
   });
+
 });
