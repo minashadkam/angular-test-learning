@@ -1,6 +1,6 @@
 
 import { ValueService } from './value.service';
-import {fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick, waitForAsync, inject} from '@angular/core/testing';
 
 // Straight Jasmine testing without Angular's testing support
 describe('ValueService', () => {
@@ -81,3 +81,35 @@ describe('ValueService whit testBed', () => {
   }));
 });
 
+
+
+describe('use inject within `it`', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({ providers: [ValueService] });
+  });
+
+  it('should use modified providers',
+    inject([ValueService], (service: ValueService) => {
+      service.setValue('value modified in beforeEach');
+      expect(service.getValue())
+        .toBe('value modified in beforeEach');
+    })
+  );
+});
+
+
+describe('using waitForAsync(inject) within beforeEach', () => {
+  let serviceValue: string;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({ providers: [ValueService] });
+  });
+
+  beforeEach(waitForAsync(inject([ValueService], (service: ValueService) => {
+    service.getPromiseValue().then(value => serviceValue = value);
+  })));
+
+  it('should use asynchronously modified value ... in synchronous test', () => {
+    expect(serviceValue).toBe('promise value');
+  });
+});

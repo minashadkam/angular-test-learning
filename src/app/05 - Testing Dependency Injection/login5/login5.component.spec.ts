@@ -1,6 +1,6 @@
 import {TestBed, ComponentFixture, inject} from '@angular/core/testing';
 import {Login5Component} from './login5.component';
-import {AuthService} from '../../../service/auth/auth.service';
+import {AuthService} from '../../service/auth/auth.service';
 
 class MockAuthService extends AuthService {
   // tslint:disable-next-line:typedef

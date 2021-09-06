@@ -1,6 +1,6 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import {Login3Component} from './login3.component';
-import {AuthService} from '../../../service/auth/auth.service';
+import {AuthService} from '../../service/auth/auth.service';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 

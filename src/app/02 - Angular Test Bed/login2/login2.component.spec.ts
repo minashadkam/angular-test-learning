@@ -1,6 +1,6 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import {Login2Component} from './login2.component';
-import {AuthService} from '../../../service/auth/auth.service';
+import {AuthService} from '../../service/auth/auth.service';
 
 describe('Component: Login', () => {
 

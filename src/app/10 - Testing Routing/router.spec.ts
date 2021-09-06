@@ -1,5 +1,3 @@
-
-
 import { HomeComponent, SearchComponent, AppComponent, routes } from "./router";
 import {Router} from '@angular/router';
 import {fakeAsync, TestBed, tick} from '@angular/core/testing';
