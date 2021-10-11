@@ -6,7 +6,7 @@ import {
 import {
   FormGroup,
   Validators,
-  FormBuilder
+  FormBuilder, FormControl
 } from '@angular/forms';
 
 export class User {
@@ -38,25 +38,23 @@ export class Login7Component implements OnInit {
   }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      email: ['', [
-        Validators.required,
-        Validators.pattern('[^ @]*@[^ @]*')]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8)]],
+
+    this.form = new FormGroup({
+      email: new FormControl(null , [Validators.pattern('[^ @]*@[^ @]*')]),
+      password: new FormControl(null , [ Validators.minLength(8)])
     });
+
+    // this.form = this.fb.group({
+    //   email: ['', [Validators.required, Validators.pattern('[^ @]*@[^ @]*')]],
+    //   password: ['', [Validators.required, Validators.minLength(8)]],
+    // });
+
   }
 
   login() {
     console.log(`Login ${this.form.value}`);
     if (this.form.valid) {
-      this.loggedIn.emit(
-        new User(
-          this.form.value.email,
-          this.form.value.password
-        )
-      );
+      this.loggedIn.emit(new User(this.form.value.email, this.form.value.password));
     }
   }
 }

@@ -3,7 +3,7 @@ import {ComponentFixture, fakeAsync, TestBed, tick, async, waitForAsync} from '@
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 
-fdescribe('Component: Login', () => {
+describe('Component: Login', () => {
 
   let component: Login4Component;
   let fixture: ComponentFixture<Login4Component>;

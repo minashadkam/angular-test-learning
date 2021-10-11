@@ -11,7 +11,7 @@ class TestHoverFocusComponent {
 }
 
 
-fdescribe('Directive: HoverFocus', () => {
+describe('Directive: HoverFocus', () => {
   let component: TestHoverFocusComponent;
   let fixture: ComponentFixture<TestHoverFocusComponent>;
   let inputEl: DebugElement;
