@@ -4,7 +4,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import {QuotesComponent} from './components/quotes/Quotes.component';
-import {AppRoutingModule} from './app-routing.module';
 import {DefaultPipe} from './pipes/default/default.pipe';
 import {LoginComponent} from './01 - Testing with Mocks & Spies/login/login.component';
 import {Login2Component} from './02 - Angular Test Bed/login2/login2.component';
@@ -22,13 +21,14 @@ import {UserComponent} from './components/user/user.component';
 import {LoggingInterceptor} from './service/loggingInterceptor.service';
 import {AuthInterceptor} from './service/authInterceptor.service';
 import {ContactComponent} from './components/contact/contact.component';
-import {HoverFocusDirective} from './directives/hoverfocus.directive';
 import {BannerComponent} from './00-02-Component Testing/banner/banner.component';
 import {TitleCasePipe} from './00-00-Testing Pipes/title-case.pipe';
 import {BannerInitialComponent} from './00-02-Component Testing/banner/banner-initial.component';
 import {BannerExternalComponent} from './00-02-Component Testing/banner/banner-external.component';
 import {LightSwitchComponent} from './00-02-Component Testing/light-switch/light-switch.component';
 import {TwainComponent} from './00-02-Component Testing/twain/twain.component';
+import {HoverFocusDirective} from './07 - Testing Directives/hover-focus/hover-focus.directive';
+import {HomeComponent, SearchComponent,AppRoutingModule} from './10 - Testing Routing/router';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,8 @@ import {TwainComponent} from './00-02-Component Testing/twain/twain.component';
     BannerComponent,
     TwainComponent,
 
-
+    SearchComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +69,7 @@ import {TwainComponent} from './00-02-Component Testing/twain/twain.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }],  bootstrap: [AppComponent]
 })
 export class AppModule { }

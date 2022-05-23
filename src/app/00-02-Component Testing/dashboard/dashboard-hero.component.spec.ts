@@ -10,6 +10,7 @@ import { DashboardHeroComponent } from './dashboard-hero.component';
 
 
 
+// study this *************
 describe('DashboardHeroComponent class test', () => {
   it('raises the selected event when clicked', () => {
     const comp = new DashboardHeroComponent();

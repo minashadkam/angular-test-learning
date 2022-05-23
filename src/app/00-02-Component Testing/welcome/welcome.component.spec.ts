@@ -7,7 +7,7 @@ class MockUserService {
   isLoggedIn = true;
   user = { name: 'Test User'};
 }
-
+// study this *************
 describe('WelcomeComponent (class only)', () => {
   let comp: WelcomeComponent;
   let userService: UserService;

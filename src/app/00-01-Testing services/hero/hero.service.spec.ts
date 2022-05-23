@@ -4,7 +4,7 @@ import {Hero} from '../../model/hero';
 import {asyncData, asyncError} from '../../model';
 
 
-fdescribe ('HeroesService (with spies)', () => {
+describe ('HeroesService (with spies)', () => {
   let httpClientSpy: { get: jasmine.Spy };
   let heroService: HeroService;
 
